@@ -31,7 +31,11 @@ median(totalsteps, na.rm=TRUE)
 
 ## What is the average daily activity pattern?
 
-
+'''{r avdailyactivity}
+activitydata <- read.csv("./activity.csv", row.names = NULL, nrows=17568, check.names=F, stringsAsFactors=F, header=T, sep=',', na.strings="NA", comment.char="", quote='\"')
+intaveragesteps <- aggregate(x = list(averagesteps = activitydata$steps), by = list(interval = activitydata$interval), FUN = mean, na.rm = TRUE)
+plot(intaveragesteps$interval, intaveragesteps$averagesteps, type="l", col="blue", xlab="The 5-minute Intervals", ylab="Average Number of Steps", main="Average Daily Activity Pattern")
+'''
 
 ## Imputing missing values
 
