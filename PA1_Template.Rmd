@@ -45,5 +45,8 @@ intaveragesteps[which.max(intaveragesteps$averagesteps), ]
 '''{r missingvalues}
 misvalcount <- sum(is.na(activitydata$steps))
 '''
-#### 2. 
+#### 2. Devise a strategy for filling in all of the missing values in the dataset.
+'''{r fillingmisvalues}
+
+'''
 ## Are there differences in activity patterns between weekdays and weekends?
