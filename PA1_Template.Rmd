@@ -43,7 +43,7 @@ intaveragesteps[which.max(intaveragesteps$averagesteps), ]
 ## Imputing missing values
 ### 1. Calculating and reporting the total number of missing values in the dataset (i.e. the total number of rows with NAs)
 '''{r missingvalues}
-
+misvalcount <- sum(is.na(activitydata$steps))
 '''
-
+### 2. 
 ## Are there differences in activity patterns between weekdays and weekends?
