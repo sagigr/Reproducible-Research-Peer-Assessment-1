@@ -50,8 +50,9 @@ misvalcount <- sum(is.na(activitydata$steps))
 intaveragesteps$averagesteps - average steps for each interval
 filledactivitydata <- function(steps, interval) {
     filled <- NA
-    if (!is.na(steps)) 
-        filled <- c(steps) else filled <- (averages[averages$interval == interval, "steps"])
+    if (!is.na(activity$steps)) 
+        filled <- c(steps) 
+        else filled <- (averages[averages$interval == interval, "steps"])
     return(filled)
 }
 filled.data <- data
