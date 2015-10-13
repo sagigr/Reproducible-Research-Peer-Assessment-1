@@ -47,6 +47,6 @@ misvalcount <- sum(is.na(activitydata$steps))
 '''
 #### 2. Devise a strategy for filling in all of the missing values in the dataset. I used a strategy of filling the missing values with a mean for that 5-minute interval.
 '''{r fillingmisvalues}
-
+filledactivitydata <- 
 '''
 ## Are there differences in activity patterns between weekdays and weekends?
