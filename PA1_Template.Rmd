@@ -21,7 +21,7 @@ if(!exists("activitydata")){
 '''{r totalsteps}
 totalsteps <- tapply(activitydata$steps, activitydata$date, FUN=sum, na.rm=TRUE)
 hist(totalsteps, main="Total Number of Steps per Day", 
-     xlab="Total Number of Steps", ylab="Frequency", col="Blue", breaks=25)
+     xlab="Total Number of Steps", ylab="Frequency", col="blue", breaks=25)
 '''
 #### 2. Calculating and reporting the mean and median of the total number of steps taken per day.
 '''{r meanmedian}
@@ -56,14 +56,19 @@ imputvalue <- function(steps, interval) {
      }  
     return(imput)
 }
-filledactivitydata <- activitydata
-filledactivitydata$steps <- mapply(imputvalue, filledactivitydata$steps, filledactivitydata$interval)
 '''
 
 #### 3. Creating a new dataset that is equal to the original dataset but with the missing data filled in.
-
+''' {r newdataset}
+filledactivitydata <- activitydata
+filledactivitydata$steps <- mapply(imputvalue, filledactivitydata$steps, filledactivitydata$interval)
+'''
 #### 4. Making a histogram of the total number of steps taken each day.
-
+'''{r newtotalsteps} 
+newtotalsteps <- tapply(filledactivitydata$steps, filledactivitydata$date, FUN = sum)
+hist(newtotalsteps, main="Total Number of Steps per Day (NA values filled)", 
+     xlab="Total Number of Steps", ylab="Frequency", col="red", breaks=25)
+'''
 #### Calculating and reporting the mean and median total number of steps taken per day.
 Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
 ## Are there differences in activity patterns between weekdays and weekends?
