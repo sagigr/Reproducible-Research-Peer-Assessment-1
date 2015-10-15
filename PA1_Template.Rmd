@@ -39,7 +39,7 @@ plot(intaveragesteps$interval, intaveragesteps$averagesteps, type="l", col="red"
 '''{r maxnumbersteps}
 intaveragesteps[which.max(intaveragesteps$averagesteps), ]
 '''
-#### The 5-minute interval, on average across all days in the dataset, that contains the maximum number of steps is 835.
+The 5-minute interval, on average across all days in the dataset, that contains the maximum number of steps is 835.
 
 ## Imputing missing values
 #### 1. Calculating and reporting the total number of missing values in the dataset (i.e. the total number of rows with NAs)
