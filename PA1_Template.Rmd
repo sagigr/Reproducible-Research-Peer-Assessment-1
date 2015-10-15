@@ -1,6 +1,5 @@
 # Reproducible Research: Peer Assessment 1
 
-
 ## Loading and preprocessing the data
 
 '''{r setoptions, echo=FALSE}
@@ -28,7 +27,7 @@ hist(totalsteps, main="Total Number of Steps per Day",
 mean(totalsteps, na.rm=TRUE)
 median(totalsteps, na.rm=TRUE)
 '''
-
+#### The mean and the median is 9354.23 and 10395 respectively.
 
 ## What is the average daily activity pattern?
 #### 1. Making a time series plot of the 5-minute interval and the average number of steps taken, averaged across all days.
@@ -40,17 +39,21 @@ plot(intaveragesteps$interval, intaveragesteps$averagesteps, type="l", col="red"
 '''{r maxnumbersteps}
 intaveragesteps[which.max(intaveragesteps$averagesteps), ]
 '''
+#### The 5-minute interval, on average across all days in the dataset, that contains the maximum number of steps is 835.
+
 ## Imputing missing values
 #### 1. Calculating and reporting the total number of missing values in the dataset (i.e. the total number of rows with NAs)
 '''{r missingvalues}
 (sum(is.na(activitydata$steps)))
 '''
-#### 2. Devise a strategy for filling in all of the missing values in the dataset. I used a strategy of filling the missing values with a mean of the steps.
+#### The total number of missing values in the dataset is 2304.
+
+#### 2. Devise a strategy for filling in all of the missing values in the dataset. 
+#### I used a strategy of filling the missing values with a mean of the steps.
 '''{r fillingmisvalues}
 NAP <- which(is.na(activitydata$steps))
 imputdata <- rep(mean(activitydata$steps, na.rm=TRUE), times=length(NAP))
 '''
-
 #### 3. Creating a new dataset that is equal to the original dataset but with the missing data filled in.
 ''' {r newdataset}
 activitydata[NAP, "steps"] <- imputdata
@@ -66,5 +69,7 @@ hist(newtotalsteps, main="Total Number of Steps per Day (NA values filled)",
 mean(newtotalsteps)
 median(newtotalsteps)
 '''
-Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
+#### The mean and the median total number of steps taken per day is 10766.19 (both of them).
+#### Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
+#### 
 ## Are there differences in activity patterns between weekdays and weekends?
