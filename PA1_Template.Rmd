@@ -45,30 +45,26 @@ intaveragesteps[which.max(intaveragesteps$averagesteps), ]
 '''{r missingvalues}
 (sum(is.na(activitydata$steps)))
 '''
-#### 2. Devise a strategy for filling in all of the missing values in the dataset. I used a strategy of filling the missing values with a mean for that 5-minute interval.
+#### 2. Devise a strategy for filling in all of the missing values in the dataset. I used a strategy of filling the missing values with a mean of the steps.
 '''{r fillingmisvalues}
-imputvalue <- function(steps, interval) {
-     imput <- NA
-     if (!is.na(steps)) {
-              imput <- c(steps)
-     }  else {
-        imput <- (intaveragesteps[intaveragesteps$interval == interval, "steps"])
-     }  
-    return(imput)
-}
+NAP <- which(is.na(activitydata$steps))
+imputdata <- rep(mean(activitydata$steps, na.rm=TRUE), times=length(NAP))
 '''
 
 #### 3. Creating a new dataset that is equal to the original dataset but with the missing data filled in.
 ''' {r newdataset}
-filledactivitydata <- activitydata
-filledactivitydata$steps <- mapply(imputvalue, filledactivitydata$steps, filledactivitydata$interval)
+activitydata[NAP, "steps"] <- imputdata
 '''
 #### 4. Making a histogram of the total number of steps taken each day.
 '''{r newtotalsteps} 
-totalsteps <- tapply(filledactivitydata$steps, filledactivitydata$date, FUN = sum)
-hist(totalsteps, main="Total Number of Steps per Day (NA values filled)", 
+newtotalsteps <- tapply(activitydata$steps, activitydata$date, FUN = sum)
+hist(newtotalsteps, main="Total Number of Steps per Day (NA values filled)", 
      xlab="Total Number of Steps", ylab="Frequency", col="red", breaks=25)
 '''
 #### Calculating and reporting the mean and median total number of steps taken per day.
+'''{r newmeanmedian}
+mean(newtotalsteps)
+median(newtotalsteps)
+'''
 Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
 ## Are there differences in activity patterns between weekdays and weekends?
