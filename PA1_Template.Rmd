@@ -49,7 +49,7 @@ The 5-minute interval, on average across all days in the dataset, that contains 
 #### The total number of missing values in the dataset is 2304.
 
 #### 2. Devise a strategy for filling in all of the missing values in the dataset. 
-#### I used a strategy of filling the missing values with a mean of the steps.
+I used a strategy of filling the missing values with a mean of the steps.
 '''{r fillingmisvalues}
 NAP <- which(is.na(activitydata$steps))
 imputdata <- rep(mean(activitydata$steps, na.rm=TRUE), times=length(NAP))
@@ -69,10 +69,10 @@ hist(newtotalsteps, main="Total Number of Steps per Day (NA values filled)",
 mean(newtotalsteps)
 median(newtotalsteps)
 '''
-#### The mean and the median total number of steps taken per day is 10766.19 (both of them).
+The mean and the median total number of steps taken per day is 10766.19 (both of them).
 #### Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
-#### Yes, these values differ from the estimates from the first part of the assignment.
-#### The impact of imputing missing data on the estimates of the total daily number of steps is that the estimates became higher.
+Yes, these values differ from the estimates from the first part of the assignment.
+The impact of imputing missing data on the estimates of the total daily number of steps is that the estimates became higher.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 #### 1. Creating a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
