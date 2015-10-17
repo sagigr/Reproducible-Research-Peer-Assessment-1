@@ -76,10 +76,17 @@ The impact of imputing missing data on the estimates of the total daily number o
 
 ## Are there differences in activity patterns between weekdays and weekends?
 #### 1. Creating a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
+In this part I'll continue to use the NA-filled values dataset.
 '''{r weekdaysfactor}
-
+activitydata$date <- as.POSIXct(activitydata$date, format="%Y-%m-%d")
+activitydata <- data.frame(date=activitydata$date, weekday=weekdays(activitydata$date),                                            steps=activitydata$steps, interval=activitydata$interval)
+activitydata <- cbind(activitydata, daytype=ifelse(activitydata$weekday == "Saturday" | 
+                                                   activitydata$weekday == "Sunday", "weekend", "weekday"))
 '''
 #### 2.Making a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).
 '''{r weekdaysplot}
-
+library(lattice)
+daytypeaverages <- aggregate(activitydata$steps, by=list(daytype = activitydata$daytype, weekday = activitydata$weekday, interval = activitydata$interval), mean)
+xyplot(x ~ interval | daytype, daytypeaverages, type="l", lwd=1, xlab="Interval", ylab="Number of Steps", 
+       layout=c(1,2))
 '''
